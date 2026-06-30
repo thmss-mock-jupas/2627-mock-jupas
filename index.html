@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKTA THMSS Mock JUPAS (26-27)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
+            padding: 40px 20px;
+            margin: 0;
+            min-height: 100vh;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?q=80&w=2068&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        h2 {
+            margin-top: 0;
+            color: #1a365d;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .instruction-paragraph {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        .instruction-paragraph a {
+            color: #3182ce;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .instruction-paragraph a:hover {
+            text-decoration: underline;
+        }
+        .student-info-grid {
+            background-color: rgba(235, 248, 255, 0.9);
+            border: 1px solid #bee3f8;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .info-field label {
+            font-weight: 600;
+            color: #2b6cb0;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .info-field input, .info-field select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            background-color: #fff;
+            height: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+        th {
+            background-color: rgba(247, 250, 252, 0.9);
+            color: #2d3748;
+            font-weight: 600;
+        }
+        .band-A { background-color: rgba(255, 250, 240, 0.85); }
+        .band-B { background-color: rgba(247, 250, 252, 0.85); }
+        .band-C { background-color: rgba(240, 255, 244, 0.85); }
+        
+        .choice-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .band-A .choice-badge { background: #feebc8; color: #c05621; }
+        .band-B .choice-badge { background: #e2e8f0; color: #4a5568; }
+        .band-C .choice-badge { background: #c6f6d5; color: #22543d; }
+
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        select:focus {
+            border-color: #3182ce;
+        }
+        select:disabled {
+            background-color: #edf2f7;
+            cursor: not-allowed;
+        }
+        .btn-submit {
+            background-color: #3182ce;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            float: right;
+            transition: background-color 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* Dynamic layout handlers specifically targeting PDF generation layout output templates */
+        .pdf-text-replacement {
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            color: #1a202c;
+            word-break: break-word;
+        }
+        
+        .pdf-mode .pdf-text-replacement {
+            display: block !important;
+        }
+        
+        /* Fixes the top whitespace gap inside the generated PDF document */
+        .pdf-mode {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        .pdf-mode table {
+            margin-top: 0 !important;
+        }
+        
+        .pdf-mode select, .pdf-mode input, .pdf-mode .pdf-exclude {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="pdfContent">
+    <h2 class="pdf-exclude">HKTA THMSS Mock JUPAS (26-27)</h2>
+    
+    <div class="instruction-paragraph pdf-exclude">
+        Reference: <a href="https://www.jupas.edu.hk/en/" target="_blank">https://www.jupas.edu.hk/en/</a><br><br>
+        Please complete the Mock JUPAS by 14/Oct (Wed) 23:59.<br>
+        You are required to fill in the choices from Band A to Band C (A1 - C10)
+    </div>
+    
+    <form id="programForm" onsubmit="handleSubmit(event)">
+        <div class="student-info-grid pdf-exclude">
+            <div class="info-field">
+                <label for="englishName">English Name:</label>
+                <input type="text" id="englishName" name="englishName" required placeholder="e.g., Chan Tai Man">
+            </div>
+            
+            <div class="info-field">
+                <label for="studentClass">Class:</label>
+                <select id="studentClass" name="studentClass" required>
+                    <option value="">-- Select Class --</option>
+                    <option value="6A">6A</option>
+                    <option value="6B">6B</option>
+                    <option value="6C">6C</option>
+                    <option value="6D">6D</option>
+                    <option value="6E">6E</option>
+                </select>
+            </div>
+
+            <div class="info-field">
+                <label for="classNumber">Class Number:</label>
+                <select id="classNumber" name="classNumber" required>
+                    <option value="">-- Select No. --</option>
+                </select>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Choice</th>
+                    <th style="width: 35%;">University</th>
+                    <th style="width: 50%;">Program</th>
+                </tr>
+            </thead>
+            <tbody id="formRows">
+            </tbody>
+        </table>
+        <button type="submit" class="btn-submit" id="submitBtn">Submit Choices</button>
+    </form>
+</div>
+
+<script>
+    const universityData = {
+        "CityU":
